@@ -52,6 +52,7 @@ class CustomerStorage:
                 )
             if (
                 not isinstance(record["id"], int)
+                or isinstance(record["id"], bool)
                 or not isinstance(record["name"], str)
                 or not isinstance(record["email"], str)
             ):
