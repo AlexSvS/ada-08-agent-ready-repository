@@ -141,3 +141,33 @@ def test_storage_save_creates_nested_directories(tmp_path: Path):
     storage.save_all([{"id": 1, "name": "Nested", "email": "nested@example.com"}])
     assert file_path.is_file()
 
+
+@pytest.mark.parametrize("bool_id", [True, False])
+def test_read_all_boolean_id_raises_storage_error(tmp_path: Path, bool_id: bool):
+    """Verify StorageError is raised when a customer record has a Boolean id (VR-03, AC-08, CR-001).
+
+    In Python, bool is a subclass of int; the storage layer must explicitly
+    reject Boolean id values so that JSON `true`/`false` do not pass as valid
+    integer customer IDs.
+    """
+    data = [{"id": bool_id, "name": "Bool User", "email": "bool@example.com"}]
+    file_path = tmp_path / "bool_id.json"
+    file_path.write_text(__import__("json").dumps(data), encoding="utf-8")
+
+    storage = CustomerStorage(file_path=file_path)
+    with pytest.raises(StorageError, match="contains invalid field types"):
+        storage.read_all()
+
+
+def test_read_all_valid_integer_id_accepted(tmp_path: Path):
+    """Verify that a plain integer id (e.g. 1) is still accepted after the Boolean fix (CR-001)."""
+    data = [{"id": 1, "name": "Valid User", "email": "valid@example.com"}]
+    file_path = tmp_path / "valid_int_id.json"
+    file_path.write_text(__import__("json").dumps(data), encoding="utf-8")
+
+    storage = CustomerStorage(file_path=file_path)
+    records = storage.read_all()
+
+    assert len(records) == 1
+    assert records[0]["id"] == 1
+    assert records[0]["name"] == "Valid User"
