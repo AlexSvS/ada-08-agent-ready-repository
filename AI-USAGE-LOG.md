@@ -18,3 +18,15 @@ The student used the audit as an initial assessment of the repository's readines
 Impact: 
 N/A
 
+### Entry 02 — AGENTS.md design
+Tool: ChatGPT
+Date: 2026-10-26
+Stage: Initial Audit
+
+Prompt: Explain how to add a linting command to the ada-08-agent-ready-repository project and improve the AGENTS.md instructions to include linting.
+
+AI contribution: Recommended Ruff as the Python linter, provided installation and execution commands, suggested a pyproject.toml configuration, and drafted an AGENTS.md section documenting linting procedures and reporting requirements.
+
+Student decision: The student reviewed the proposed Ruff configuration and commands, determine whether they fit the repository, and apply the changes only after verifying the existing configuration and project requirements.
+
+Impact: Established a practical approach for integrating automated Python linting into the repository's development workflow, improving code-quality checks and clarifying validation expectations for AI coding agents.
