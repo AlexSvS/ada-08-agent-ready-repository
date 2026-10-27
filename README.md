@@ -79,22 +79,22 @@ No customers found matching 'xyz123'
 
 Run the automated test suite with pytest:
 ```bash
-pytest -v
+python -m pytest -v
 ```
 
 Run specific test modules:
 ```bash
 # Service logic tests
-pytest tests/test_service.py -v
+python -m pytest tests/test_service.py -v
 
 # Storage persistence tests
-pytest tests/test_storage.py -v
+python -m pytest tests/test_storage.py -v
 
 # CLI and error handling tests
-pytest tests/test_cli.py -v
+python -m pytest tests/test_cli.py -v
 
 # Validation and error tests
-pytest tests/test_cli.py -k "validation or error" -v
+python -m pytest tests/test_cli.py -k "validation or error" -v
 ```
 
 ## Traceability & Documentation

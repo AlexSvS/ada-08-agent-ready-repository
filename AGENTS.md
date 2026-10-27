@@ -10,7 +10,7 @@
 - Do not delete or weaken tests.
 - Do not add dependencies without justification.
 ## Validation
-- Run pytest before and after changes.
+- Run "python -m pytest" before and after changes.
 - Add tests for new behavior.
 - Report changed files and test results.
 - Stop and ask for clarification if requirements conflict.
